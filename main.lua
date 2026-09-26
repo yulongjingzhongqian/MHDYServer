@@ -1060,12 +1060,12 @@ GM工具 = true
 结婚定制 = false
 VIP定制 = true
 调试模式 = false
-
-if 服务端参数.ip == "127.0.0.1" then
-	假人系统 = false
-else
-	假人系统 = false
-end
+假人系统 = true
+-- if 服务端参数.ip == "127.0.0.1" then
+-- 	假人系统 = false
+-- else
+-- 	假人系统 = false
+-- end
 
 服务器关闭 = {
 	计时 = 300,
@@ -2067,9 +2067,9 @@ end
 		end
 	end
 
-	if 假人系统 then
-		任务处理类:假人刷屏2()--secondLoop()
-	end
+	-- if 假人系统 then
+	-- 	任务处理类:假人刷屏2()--secondLoop()
+	-- end
 
 	for n, v in pairs(玩家数据) do
 		if 玩家数据[n].角色:取任务(300) ~= 0 and 玩家数据[n].角色.数据.跑镖遇怪时间 ~= nil and 玩家数据[n].角色.数据.跑镖遇怪时间 <= os.time() then

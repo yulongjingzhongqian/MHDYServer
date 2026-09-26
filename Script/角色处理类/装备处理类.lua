@@ -2615,7 +2615,8 @@ end
 end
 
 打造体力公式 = function(a)
-	return math.min(30 + 2 * a, 330)
+	-- return math.min(30 + 2 * a, 330)
+	return math.min(2 * a / 10, 330)
 end
 
 角色扣除体力 = function(id, 扣除体力)

@@ -971,6 +971,8 @@ function 打造处理类:分解装备获取吸附石数量(装备等级)
 		return 取随机数(7, 8)
 	elseif 装备等级 <= 150 then
 		return 取随机数(8, 9)
+	elseif 装备等级 <= 160 then
+		return 取随机数(9, 10)
 	end
 end
 

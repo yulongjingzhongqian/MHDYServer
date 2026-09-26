@@ -6944,7 +6944,7 @@ end
 		常规提示(id, "#Y你的门派不允许你使用这样的法宝")
 
 		return
-	elseif 名称 == "救命毫米" and 门派 ~= "方寸山" then
+	elseif 名称 == "救命毫毛" and 门派 ~= "方寸山" then
 		常规提示(id, "#Y你的门派不允许你使用这样的法宝")
 
 		return

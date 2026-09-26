@@ -394,29 +394,29 @@ local 已存在 = false
 	清灵净瓶 = 1,
 	["18技能胚子召唤兽礼包"] = 1,
 	["80级灵饰礼包"] = 1,
-		["中秋节卡片"] = 1,
-		["宝宝月饼"] = 1,
-		["转生衣"] = 1,
-		["转生衣碎片"] = 1,
-		["月饼"] = 1,
-		["潜能果"] = 1,
-		["神秘宝石"] = 1,
-		["突破小丹"] = 1,
-		["突破中丹"] = 1,
-		["突破大丹"] = 1,
-			["突破丹碎片"] = 1,
-				["崛起丹碎片"] = 1,
-			["崛起丹"] = 1,
-			["命中石"] = 1,
-			["伤害石"] = 1,
-			["速度石"] = 1,
-			["法伤石"] = 1,
-			["伤害石特种"] = 1,
-			["法伤石特种"] = 1,
-			["法防石"] = 1,
-			["气血石"] = 1,
-			["血盆"] = 1,
-			["防御石"] = 1,
+	["中秋节卡片"] = 1,
+	["宝宝月饼"] = 1,
+	["转生衣"] = 1,
+	["转生衣碎片"] = 1,
+	["月饼"] = 1,
+	["潜能果"] = 1,
+	["神秘宝石"] = 1,
+	["突破小丹"] = 1,
+	["突破中丹"] = 1,
+	["突破大丹"] = 1,
+	["突破丹碎片"] = 1,
+	["崛起丹碎片"] = 1,
+	["崛起丹"] = 1,
+	["命中石"] = 1,
+	["伤害石"] = 1,
+	["速度石"] = 1,
+	["法伤石"] = 1,
+	["伤害石特种"] = 1,
+	["法伤石特种"] = 1,
+	["法防石"] = 1,
+	["气血石"] = 1,
+	["血盆"] = 1,
+	["防御石"] = 1,
 	窗帘 = 1,
 	文竹 = 1,
 	["14技能胚子召唤兽礼包"] = 1,
@@ -1080,7 +1080,6 @@ function 道具处理类:数据处理(连接id, 序号, 数字id, 数据)
 
 	if 序号 == 3699 then
 		local id = 数字id
-
 		发送数据(玩家数据[id].连接id, 3503, 玩家数据[id].角色:取装备数据())
 		发送数据(玩家数据[id].连接id, 3506, 玩家数据[id].角色:取灵饰数据())
 		self:索要道具(连接id, 数字id, 数据)
@@ -1139,7 +1138,6 @@ function 道具处理类:数据处理(连接id, 序号, 数字id, 数据)
 			类型 = 2,
 			id = 数据.id + 0
 		}
-
 		发送数据(连接id, 3507, {
 			类型 = "玩家",
 			道具 = self:索要道具1(数字id),
@@ -1178,7 +1176,6 @@ function 道具处理类:数据处理(连接id, 序号, 数字id, 数据)
 		elseif 数据.序列 < 1 then
 			return
 		end
-
 		发送数据(连接id, 3524, {
 			道具 = self:索要仓库道具(数字id, 数据.序列, 数据.获取),
 			页数 = 数据.序列
@@ -3862,7 +3859,6 @@ end
 
 function 道具处理类:给予暗器(id, 等级)
 	local 名称 = "飞刀"
-
 	if 等级 == 1 then
 		名称 = "飞刀"
 	elseif 等级 == 10 then
@@ -3884,7 +3880,6 @@ function 道具处理类:给予暗器(id, 等级)
 	elseif 等级 == 9 then
 		名称 = "魔睛子"
 	end
-
 	常规提示(id, "#Y你获得了#R" .. 名称)
 	self:给予道具(id, 名称)
 end
@@ -4015,7 +4010,7 @@ function 道具处理类:替换法宝(连接id, id, 编号, 编号1)
 		常规提示(id, "#Y你的门派不允许你使用这样的法宝")
 
 		return
-	elseif 名称 == "救命毫米" and 门派 ~= "方寸山" then
+	elseif 名称 == "救命毫毛" and 门派 ~= "方寸山" then
 		常规提示(id, "#Y你的门派不允许你使用这样的法宝")
 
 		return
@@ -12303,30 +12298,26 @@ function 道具处理类:使用道具(连接id, id, 内容)
 
 		道具使用 = true
 
-
-
-
 		elseif 名称 == "中秋节卡片" then
-		if self.数据[道具id].数量 < 1 then
-			常规提示(id, "道具不足")
-
+			if self.数据[道具id].数量 < 1 then
+				常规提示(id, "道具不足")
 			return
 		end
 
 		local 随机月饼 = {
-		"中",
-		"中",
-		"中",
-		"秋",
-		"秋",
-		"秋",
-		"乐",
-		"乐",
-		"快",
-		"快",
-		"节",
-		"乐"
-	}
+			"中",
+			"中",
+			"中",
+			"秋",
+			"秋",
+			"秋",
+			"乐",
+			"乐",
+			"快",
+			"快",
+			"节",
+			"乐"
+		}
 
 
 	   local a = 随机月饼[ygsj(#随机月饼)]
@@ -12337,55 +12328,38 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		删除数量 = 1
 		道具使用 = true
 
-   elseif 名称 == "金砖" then
+   	elseif 名称 == "金砖" then
 		if self.数据[道具id].数量 < 1 then
 			常规提示(id, "道具不足")
 
 			return
 		end
-
-  玩家数据[id].角色:添加银子(50000000, "神秘宝箱", 1)
-常规提示(id, "获得50000000银子")
+  		玩家数据[id].角色:添加银子(50000000, "神秘宝箱", 1)
+		常规提示(id, "获得50000000银子")
         删除数量 = 1
 		道具使用 = true
-
-
-
-
-  elseif 名称 == "大额银票" then
-
-
-  玩家数据[id].角色:添加银子(100000000, "神秘宝箱", 1)
-  常规提示(id, "获得1亿银子")
-
-        删除数量 = 1
+  	elseif 名称 == "大额银票" then
+		玩家数据[id].角色:添加银子(100000000, "神秘宝箱", 1)
+		常规提示(id, "获得1亿银子")
+		删除数量 = 1
 		道具使用 = true
-
-		elseif 名称 == "转生衣碎片" then
+	elseif 名称 == "转生衣碎片" then
 		if self.数据[道具id].数量 < 999 then
 			常规提示(id, "道具不足")
-
 			return
 		end
 
 		local 随机月饼 = {
-
-		"转生衣",
-		"转生衣"
-	}
-
+			"转生衣",
+			"转生衣"
+		}
 
 	   local a = 随机月饼[ygsj(#随机月饼)]
 			快捷给道具(id, a, 1, nil, nil, 1)
 
 		--快捷给道具(id, "中", 1, self.数据[道具id])
-
 		删除数量 = 999
 		道具使用 = true
-
-
-
-
 
 		elseif 名称 == "突破丹碎片" then
 		if self.数据[道具id].数量 < 9999 then
@@ -12410,8 +12384,8 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		"突破大丹",
 		"突破大丹",
 		"突破大丹"
-	}
-	   local a = 随机月饼[ygsj(#随机月饼)]
+		}
+	   	local a = 随机月饼[ygsj(#随机月饼)]
 			快捷给道具(id, a, 1, nil, nil, 1)
 
 		--快捷给道具(id, "中", 1, self.数据[道具id])
@@ -12420,35 +12394,32 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		道具使用 = true
 
 
-			elseif 名称 == "神秘宝石" then
-		if self.数据[道具id].数量 < 99 then
-			常规提示(id, "神秘宝石数量不足")
-
+		elseif 名称 == "神秘宝石" then
+			if self.数据[道具id].数量 < 99 then
+				常规提示(id, "神秘宝石数量不足")
 			return
 		end
 
 		local 随机月饼 = {
-
-		"伤害石",
-		"命中石",
-		"防御石",
-		"速度石",
-		"法伤石",
-		"法防石",
-		"伤害石",
-		"命中石",
-		"防御石",
-		"速度石",
-		"法伤石",
-		"法防石",
-		"气血石",
-		"气血石",
-		"法伤石特种",
-		"伤害石特种",
-
-	}
-	   local a = 随机月饼[ygsj(#随机月饼)]
-			快捷给道具(id, a, 1, nil, nil, 1)
+			"伤害石",
+			"命中石",
+			"防御石",
+			"速度石",
+			"法伤石",
+			"法防石",
+			"伤害石",
+			"命中石",
+			"防御石",
+			"速度石",
+			"法伤石",
+			"法防石",
+			"气血石",
+			"气血石",
+			"法伤石特种",
+			"伤害石特种",
+		}
+	  	local a = 随机月饼[ygsj(#随机月饼)]
+		快捷给道具(id, a, 1, nil, nil, 1)
 
 		--快捷给道具(id, "中", 1, self.数据[道具id])
 
@@ -12456,20 +12427,17 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		道具使用 = true
 
 
-			elseif 名称 == "崛起丹碎片" then
-		if self.数据[道具id].数量 < 9999 then
-			常规提示(id, "道具不足")
-
+		elseif 名称 == "崛起丹碎片" then
+			if self.数据[道具id].数量 < 9999 then
+				常规提示(id, "道具不足")
 			return
 		end
 
 		local 随机月饼 = {
-
-
-		"崛起丹"
-	}
-	   local a = 随机月饼[ygsj(#随机月饼)]
-			快捷给道具(id, a, 1, nil, nil, 1)
+			"崛起丹"
+		}
+	   	local a = 随机月饼[ygsj(#随机月饼)]
+		快捷给道具(id, a, 1, nil, nil, 1)
 
 		--快捷给道具(id, "中", 1, self.数据[道具id])
 
@@ -12483,7 +12451,7 @@ function 道具处理类:使用道具(连接id, id, 内容)
 			return
 		end
 
-	 添加点卡(1000, 玩家数据[id].账号, id, "1000点卡")
+	 	添加点卡(1000, 玩家数据[id].账号, id, "1000点卡")
 		删除数量 = 1
 		道具使用 = true
 	elseif 名称 == "1级宝石礼包" then
@@ -12596,12 +12564,11 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		常规提示(id, "您获得了专属道具")
 
 		道具使用 = true
-		elseif 名称 == "跨服专属礼包1" then
+	elseif 名称 == "跨服专属礼包1" then
 		local 道具格子 = 玩家数据[id].角色:取道具格子2()
 
 		if 道具格子 < 2 then
 			常规提示(id, "您的道具栏没有足够的空间")
-
 			return 0
 		end
 
@@ -12629,19 +12596,7 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		临时道具编号 = self:取新编号()
 		self.数据[临时道具编号] = 物品类()
 		玩家数据[id].角色.数据.道具[临时格子] = 临时道具编号
-
-
-
-
-
-
-
-
-
-
-
 		玩家数据[id].道具.数据[临时道具编号]:置对象(临时名称)
-
 		玩家数据[id].道具.数据[临时道具编号].级别限制 = 160
 		玩家数据[id].道具.数据[临时道具编号].鉴定 = false
 		玩家数据[id].道具.数据[临时道具编号].五行 = 取五行()
@@ -12690,19 +12645,7 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		临时道具编号 = self:取新编号()
 		self.数据[临时道具编号] = 物品类()
 		玩家数据[id].角色.数据.道具[临时格子] = 临时道具编号
-
-
-
-
-
-
-
-
-
-
-
 		玩家数据[id].道具.数据[临时道具编号]:置对象(临时名称)
-
 		玩家数据[id].道具.数据[临时道具编号].级别限制 = 160
 		玩家数据[id].道具.数据[临时道具编号].鉴定 = false
 		玩家数据[id].道具.数据[临时道具编号].五行 = 取五行()
@@ -12719,8 +12662,7 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		道具使用 = true
 	elseif 名称 == "元宵" then
 		self:元宵使用(连接id, id, 内容)
-
-		return
+	return
 	elseif 名称 == "宠物口粮" or 名称 == "高级宠物口粮" then
 		if 内容.窗口 ~= "召唤兽" then
 			常规提示(id, "请选择召唤兽使用。")
@@ -12747,24 +12689,19 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		end
 	elseif 名称 == "资质丸" then
 		self:资质丸使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "大力神丸" then
+	return
+	elseif 名称 == "大力神丸" then
 		self:大力神丸使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "突破小丹" then
+	return
+	elseif 名称 == "突破小丹" then
 		self:突破小丹使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "突破中丹" then
+	return
+	elseif 名称 == "突破中丹" then
 		self:突破中丹使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "突破大丹" then
+	return
+	elseif 名称 == "突破大丹" then
 		self:突破大丹使用(连接id, id, 内容)
-
-		return
+	return
 	elseif 名称 == "还魂秘术" or 名称 == "蚩尤武诀" or 名称 == "黄帝内经" or 名称 == "六艺修行书" then
 		self:孩子书使用(连接id, id, 内容)
 
@@ -12783,92 +12720,78 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		return
 	elseif 名称 == "清灵净瓶" then
 		self:清灵净瓶处理(连接id, id, 内容)
-
 		return
 	elseif 名称 == "初级清灵仙露" or 名称 == "中级清灵仙露" or 名称 == "高级清灵仙露" then
 		self:清灵仙露处理(连接id, id, 内容)
-
-		return
+	return
 	elseif 名称 == "玉葫灵髓" then
 		self:玉葫灵髓使用(连接id, id, 内容)
-
 		return
 	elseif 名称 == "月饼" then
 		self:月饼使用(连接id, id, 内容)
 
-		return
-		elseif 名称 == "宝宝月饼" then
+	return
+	elseif 名称 == "宝宝月饼" then
 		self:宝宝月饼使用(连接id, id, 内容)
-
-		return
-			elseif 名称 == "金砖使用" then
+	return
+	elseif 名称 == "金砖使用" then
 		self:金砖使用(连接id, id, 内容)
+	return
+	elseif 名称 == "大额银票使用" then
+	self:大额银票使用(连接id, id, 内容)
+	return
+	elseif 名称 == "中秋节卡片" then
+	self:中秋节卡片使用(连接id, id, 内容)
 
-		return
-		elseif 名称 == "大额银票使用" then
-		self:大额银票使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "中秋节卡片" then
-		self:中秋节卡片使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "神秘宝石" then
+	return
+	elseif 名称 == "神秘宝石" then
 		self:神秘宝石使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "潜能果" then
+	return
+	elseif 名称 == "潜能果" then
 		self:潜能果使用(连接id, id, 内容)
-
-		return
-
-		elseif 名称 == "崛起丹" then
+	return
+	elseif 名称 == "崛起丹" then
 		self:崛起丹使用(连接id, id, 内容)
-
-		return
-		elseif 名称 == "命中石" then
+	return
+	elseif 名称 == "命中石" then
 		self:命中石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "伤害石" then
+	return
+	elseif 名称 == "伤害石" then
 		self:伤害石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "伤害石特种" then
+	return
+	elseif 名称 == "伤害石特种" then
 		self:伤害石特种使用(连接id, id, 内容)
-		return
-			elseif 名称 == "防御石" then
+	return
+	elseif 名称 == "防御石" then
 		self:防御石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "法伤石" then
+	return
+	elseif 名称 == "法伤石" then
 		self:法伤石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "法防石" then
+	return
+	elseif 名称 == "法防石" then
 		self:法防石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "法伤石特种" then
+	return
+	elseif 名称 == "法伤石特种" then
 		self:法伤石特种使用(连接id, id, 内容)
-		return
-			elseif 名称 == "速度石" then
+	return
+	elseif 名称 == "速度石" then
 		self:速度石使用(连接id, id, 内容)
-		return
-		elseif 名称 == "气血石" then
+	return
+	elseif 名称 == "气血石" then
 		self:气血石使用(连接id, id, 内容)
-		return
-			elseif 名称 == "血盆" then
+	return
+	elseif 名称 == "血盆" then
 		self:血盆使用(连接id, id, 内容)
-		return
-			elseif 名称 == "转生衣" then
+	return
+	elseif 名称 == "转生衣" then
 		self:转生衣使用(连接id, id, 内容)
-		return
-
-
+	return
 	elseif 名称 == "未激活的符石" then
 		self:激活符石对话(id, 道具id, 道具格子)
-
-		return
+	return
 	elseif 名称 == "未激活的星石" then
 		self:激活符石对话(id, 道具id, 道具格子)
-
-		return
+	return
 	elseif 名称 == "空白强化符" then
 		if 玩家数据[id].角色.数据.师门技能 ~= nil then
 			for n = 1, #玩家数据[id].角色.数据.师门技能 do
@@ -13550,7 +13473,7 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		end
 
 
-		elseif 名称 == "中" or 名称 == "秋" or 名称 == "节" or 名称 == "快" or 名称 == "乐" then
+	elseif 名称 == "中" or 名称 == "秋" or 名称 == "节" or 名称 == "快" or 名称 == "乐" then
 		if self.数据[道具id].数量 == nil then
 			self.数据[道具id].数量 = 1
 			self.数据[道具id].可叠加 = true
@@ -13744,6 +13667,8 @@ function 道具处理类:使用道具(连接id, id, 内容)
 		道具使用 = true
 
 		常规提示(id, "#Y/你获得了一个新的召唤兽" .. 模型)
+	elseif 名称 == "上古锻造图策" then
+		-- 处理上古锻造图策的逻辑
 	end
 
 	if 道具使用 then
