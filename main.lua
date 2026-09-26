@@ -1079,6 +1079,7 @@ VIP定制 = true
 }
 
 require("Script/角色处理类/符石组合类")
+--读取数据文件
 require("Script/数据中心/宝宝")
 require("Script/数据中心/宝图")
 require("Script/数据中心/变身卡")
@@ -1103,22 +1104,21 @@ require("Script/数据中心/装备特技")
 require("Script/系统处理类/共用")
 require("Script/数据中心/符石组合")
 
-假人玩家处理类在线 = true
 物品类 = require("Script/角色处理类/内存类_物品")
 宝宝类 = require("Script/角色处理类/宝宝")
 地图坐标类 = require("Script/地图处理类/地图坐标类")
 路径类 = require("Script/地图处理类/路径类")
 地图处理类 = require("Script/地图处理类/地图处理类")()
-假人玩家处理类 = require("Script/Bot/CatBooth")()
 
+--Bot 加载
+require("Script/Bot/botData")
+假人玩家处理类在线 = true
+假人玩家处理类 = require("Script/Bot/CatBooth")()
 if 假人玩家处理类 == nil then
 	假人玩家处理类在线 = false
 end
-
 摆摊假人处理类 = require("Script/Bot/摆摊假人")()
-假人代码 = loadstring(读入文件("摆摊假人.txt"))
-
-摆摊假人处理类:addBoothNpc(假人代码())
+摆摊假人处理类:addBoothNpc(BotBoothList)
 摆摊假人处理类:功能开关(true)
 
 if 假人系统 then
