@@ -20,6 +20,29 @@ function BotManager:初始化()
 
 	BoothCtrl:initAddTime(boothBotCfg.addTime)
 	BoothDb:addBoothBot(boothBotCfg.boothList)
+
+	--todo: 读取假人聊天配置
+	local chatbottxt = 读入文件("tysj/Bot/ChatBot.txt")
+	local chatBotCfg = table.loadstring(chatbottxt)
+	ChatDb:initWordChatList(chatBotCfg.wordChat)
+	ChatDb:initSystemList(chatBotCfg.systemChat)
+	ChatDb:initNameList(chatBotCfg.nameList)
+	ChatDb:initItemList(chatBotCfg.itemList)
+
+	ChatCtrl:initWordChatTime(chatBotCfg.systemTime)
+	ChatCtrl:initSysChatTime(chatBotCfg.wordTime)
+
+	--todo: 读取地图假人配置
+	local fightbottxt = 读入文件("tysj/Bot/FightBot.txt")
+	local fightBotCfg = table.loadstring(fightbottxt)
+	BotDb:initTeamDb(fightBotCfg.teamList)
+	BotDb:initAloneDb(fightBotCfg.botList)
+
+	BotCtrl:initShowCtrl(fightBotCfg.botAddTime)
+	BotCtrl:initTeamShowCtrl(fightBotCfg.teamBotAddTime)
+	BotCtrl:initFightTime(fightBotCfg.fightTime)
+	BotCtrl:initRunTime(fightBotCfg.runTime)
+
 	__gge.print(false, 11, "=======================")
 	__gge.print(false, 10, " 假人完成 ")
 	__gge.print(false, 11, "=======================\n")
@@ -86,7 +109,8 @@ end
 
 function BotManager:secondLoop()
 	BotCtrl:timeLoop()
-	BoothCtrl:timeLoop()
+	-- BoothCtrl:timeLoop()
+	ChatCtrl:timeLoop()
 end
 
 return BotManager

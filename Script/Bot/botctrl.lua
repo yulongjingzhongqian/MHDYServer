@@ -9,6 +9,8 @@ function BotCtrl:初始化(...)
 	self.time_run_max = 0
 	self.time_create = 0
 	self.create_num = 0
+	self.team_time_create = 0
+	self.team_create_num = 0
 	self.timeCnt = 0
 	self.minCnt = 0
 end
@@ -30,7 +32,7 @@ function BotCtrl:minLoop()
 
 	if self.minCnt % self.time_create == 0 then
 		BotDb:botAdd(self.create_num)
-		BotDb:teamBotAdd(self.create_num)
+		BotDb:teamBotAdd(self.team_create_num)
 	end
 end
 
@@ -44,9 +46,14 @@ function BotCtrl:timeLoop()
 	BotDb:timeLoop(self.timeCnt)
 end
 
-function BotCtrl:initShowNumberCtrl(arr)
+function BotCtrl:initShowCtrl(arr)
 	self.time_create = arr[1]
 	self.create_num = arr[2]
+end
+
+function BotCtrl:initTeamShowCtrl(arr)
+	self.team_time_create = arr[1]
+	self.team_create_num = arr[2]
 end
 
 function BotCtrl:initFightTime(fightTime)

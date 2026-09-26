@@ -1133,6 +1133,8 @@ if 假人系统 then
 	TeamBotBiz = require("Script/Bot/TeamBotBiz")
 	BotDb = require("Script/Bot/BotDb").创建()
 	BotCtrl = require("Script/Bot/BotCtrl").创建()
+	ChatDb = require("Script/Bot/chatdb").创建()
+	ChatCtrl = require("Script/Bot/ChatCtrl").创建()
 	BotManager = require("Script/Bot/BotManager").创建()
 end
 
@@ -2070,6 +2072,7 @@ end
 	-- if 假人系统 then
 	-- 	任务处理类:假人刷屏2()--secondLoop()
 	-- end
+	BotManager:secondLoop()
 
 	for n, v in pairs(玩家数据) do
 		if 玩家数据[n].角色:取任务(300) ~= 0 and 玩家数据[n].角色.数据.跑镖遇怪时间 ~= nil and 玩家数据[n].角色.数据.跑镖遇怪时间 <= os.time() then
