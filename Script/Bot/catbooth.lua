@@ -3145,7 +3145,7 @@ function 假人玩家处理类:mmmmwq(botId, 摊位名称, ret)
 	end
 
 	local key = "" .. botId
-	摆摊假人处理类.npcUserList[key][5] = BotNameList[取随机数(1, #BotNameList)]
+	摆摊假人处理类.npcUserList[key][5] = BotData.botNameList[取随机数(1, #BotData.botNameList)]
 	local x角色 = 角色名字[取随机数(1, #角色名字)]
 	摆摊假人处理类.npcUserList[key][7] = x角色
 	摆摊假人处理类.npcUserList[key][8] = ctx

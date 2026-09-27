@@ -1111,14 +1111,14 @@ require("Script/数据中心/符石组合")
 地图处理类 = require("Script/地图处理类/地图处理类")()
 
 --Bot 加载
-require("Script/Bot/botData")
+require("Script/Bot/BotData")
 假人玩家处理类在线 = true
 假人玩家处理类 = require("Script/Bot/CatBooth")()
 if 假人玩家处理类 == nil then
 	假人玩家处理类在线 = false
 end
 摆摊假人处理类 = require("Script/Bot/摆摊假人")()
-摆摊假人处理类:addBoothNpc(BotBoothList)
+摆摊假人处理类:addBoothNpc(BotData.botBoothList)
 摆摊假人处理类:功能开关(true)
 
 if 假人系统 then
