@@ -754,9 +754,9 @@ end
 	高级藏宝图 = {
 		"地图编号"
 	},
-	怪物卡片 = {
-		"等级"
-	}
+	-- 怪物卡片 = {
+	-- 	"等级"
+	-- },
 }
 
 function 道具处理类:取整理排序编号(道具数据)
@@ -772,6 +772,31 @@ function 道具处理类:取整理排序编号(道具数据)
 	local 粗分 = tostring(tonumber(道具数据.总类) or 0) .. tostring(tonumber(道具数据.分类) or 0)
 	local 细分 = 0
 
+	-- 用于查看物品属性
+	-- if 道具数据.名称 == "属性石" then
+	-- 	for itemName, itemValue in pairs(道具数据) do
+	-- 		local valType = type(itemValue)
+	-- 		if valType ~= "table" then
+	-- 			local strValue = ""
+	-- 			-- 针对各种非 table 类型进行合法的转换输出
+	-- 			if valType == "string" then
+	-- 				strValue = '"' .. itemValue .. '"' -- 字符串加上双引号方便区分
+	-- 			elseif valType == "boolean" then
+	-- 				strValue = itemValue and "true" or "false"
+	-- 			elseif valType == "nil" then
+	-- 				strValue = ""
+	-- 			else
+	-- 				-- number 等其他类型可以直接转字符串
+	-- 				strValue = tostring(itemValue)
+	-- 			end
+	-- 			if strValue ~= "" then
+	-- 				-- 调用你的提示函数
+	-- 				常规提示(19681, string.format("属性名: %s | 类型: %s | 属性值: %s", tostring(itemName), valType, strValue))
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
+
 	if 道具数据.级别限制 ~= nil then
 		细分 = 细分 + (tonumber(道具数据.级别限制) or 0)
 	end
@@ -780,6 +805,15 @@ function 道具处理类:取整理排序编号(道具数据)
 		细分 = 细分 + (tonumber(道具数据.阶品) or 0)
 	end
 
+	--清灵仙露稳定排序
+	if 道具数据.名称:find("清灵仙露") then
+		if 道具数据.灵气 ~= nil then
+			细分 = 细分 + (tonumber(道具数据.灵气) or 0)
+		end
+	end
+
+	--上方是用number字段作为排序参考的，特殊道具排序处理之后“细分”变为String
+	--可以在逻辑下方直接写用String判断的逻辑
 	if 特殊排序道具[道具数据.名称] ~= nil then
 		if 特殊排序道具[道具数据.名称][2] ~= nil then
 			细分 = tostring(10000 + (tonumber(特殊排序道具[道具数据.名称][2][道具数据[特殊排序道具[道具数据.名称][1]]] or 0) or 0)) .. tostring(10000 + (tonumber(道具数据.子类) or 0)) .. tostring(10000 + 细分)
@@ -790,12 +824,76 @@ function 道具处理类:取整理排序编号(道具数据)
 		细分 = tostring(10000 + (tonumber(道具数据.子类) or 0)) .. tostring(10000 + 细分)
 	end
 
+	--未激活符石稳定排序
+	if 道具数据.名称 == "未激活的符石" then
+		if 道具数据.颜色 ~= nil then
+			细分 = 细分 .. "." .. 道具数据.颜色
+		end
+		if 道具数据.符石名称 ~= nil then
+			细分 = 细分 .. "." .. 道具数据.符石名称
+		end
+	end
+
+	--通灵神装备 稳定排序
+	if 道具数据.名称:find("通灵神") then
+		if 道具数据.识别码 ~= nil then
+			细分 = 细分 .. "." .. 道具数据.识别码
+		end
+	end
+
+	--属性石 稳定排序
+	if 道具数据.名称 == "属性石" then
+		if 道具数据.特效 ~= nil then
+			细分 = 细分 .. "." .. 道具数据.特效
+		end
+	end
+
 	if 道具名称排序[道具数据.名称] == nil then
 		道具名称排序[道具数据.名称] = 道具名称排序记录 + 0
 		道具名称排序记录 = 道具名称排序记录 + 1
 	end
 
-	local aa = tonumber(粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分))
+	local aa = ""
+
+	--处理中秋炮稳定排序
+	if 道具数据.名称:find("中秋炮") then
+		if 道具数据.附带技能 ~= nil then
+			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. 道具数据.特效
+		else
+			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
+		end
+	--处理兽决类稳定排序 处理召唤兽内丹稳定排序 处理经脉秘籍稳定排序 六艺修行书稳定排序
+	elseif 道具数据.名称:find("魔兽要诀") or 道具数据.名称:find("召唤兽内丹") or 道具数据.名称:find("经脉秘籍") or 道具数据.名称 == "六艺修行书" then
+		if 道具数据.附带技能 ~= nil then
+			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. 道具数据.附带技能
+		else
+			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
+		end
+	else
+		aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
+		-- local aa = tonumber(粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分))
+	end
+
+	--处理变身卡稳定排序 等级-造型-次数
+	if 道具数据.名称:find("怪物卡片") then
+		local tempStr = ""
+		if 道具数据.等级 ~= nil then
+			tempStr = tempStr .. tostring(10000 + 道具数据.等级)
+			if 道具数据.造型 ~= nil then
+				tempStr = tempStr .. "." .. tostring(道具数据.造型)
+				if 道具数据.次数 ~= nil then
+					tempStr = tempStr .. "." .. tostring(10000 + 道具数据.次数)
+				else
+					tempStr = tempStr .. "." .. tostring(10000)
+				end
+			else
+				tempStr = tempStr .. "." .. tostring("空")
+			end
+		else
+			tempStr = tempStr .. tostring(10000)
+		end
+		aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tempStr
+	end
 
 	return aa
 end
