@@ -773,7 +773,7 @@ function 道具处理类:取整理排序编号(道具数据)
 	local 细分 = 0
 
 	-- 用于查看物品属性
-	-- if 道具数据.名称 == "属性石" then
+	-- if 道具数据.名称 == "特效石" or 道具数据.名称 == "特效石碎片" or 道具数据.名称 == "特技石" then
 	-- 	for itemName, itemValue in pairs(道具数据) do
 	-- 		local valType = type(itemValue)
 	-- 		if valType ~= "table" then
@@ -832,19 +832,15 @@ function 道具处理类:取整理排序编号(道具数据)
 		if 道具数据.符石名称 ~= nil then
 			细分 = 细分 .. "." .. 道具数据.符石名称
 		end
-	end
-
+	--元宵稳定排序
+	elseif 道具数据.名称 == "元宵" then
+		if 道具数据.食材 ~= nil then
+			细分 = 细分 .. "." .. 道具数据.食材
+		end
 	--通灵神装备 稳定排序
-	if 道具数据.名称:find("通灵神") then
+	elseif 道具数据.名称:find("通灵神") then
 		if 道具数据.识别码 ~= nil then
 			细分 = 细分 .. "." .. 道具数据.识别码
-		end
-	end
-
-	--属性石 稳定排序
-	if 道具数据.名称 == "属性石" then
-		if 道具数据.特效 ~= nil then
-			细分 = 细分 .. "." .. 道具数据.特效
 		end
 	end
 
@@ -855,9 +851,9 @@ function 道具处理类:取整理排序编号(道具数据)
 
 	local aa = ""
 
-	--处理中秋炮稳定排序
-	if 道具数据.名称:find("中秋炮") then
-		if 道具数据.附带技能 ~= nil then
+	--处理中秋炮稳定排序 处理属性石稳定排序 处理召唤兽蛋稳定排序 处理特效石稳定排序 处理特效石碎片稳定排序 特技石稳定排序
+	if 道具数据.名称 == "中秋炮" or 道具数据.名称 == "属性石" or 道具数据.名称 == "召唤兽蛋" or 道具数据.名称 == "特效石" or 道具数据.名称 == "特效石碎片" or 道具数据.名称 == "特技石" then
+		if 道具数据.特效 ~= nil then
 			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. 道具数据.特效
 		else
 			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
@@ -869,13 +865,8 @@ function 道具处理类:取整理排序编号(道具数据)
 		else
 			aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
 		end
-	else
-		aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
-		-- local aa = tonumber(粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分))
-	end
-
 	--处理变身卡稳定排序 等级-造型-次数
-	if 道具数据.名称:find("怪物卡片") then
+	elseif 道具数据.名称:find("怪物卡片") then
 		local tempStr = ""
 		if 道具数据.等级 ~= nil then
 			tempStr = tempStr .. tostring(10000 + 道具数据.等级)
@@ -893,6 +884,9 @@ function 道具处理类:取整理排序编号(道具数据)
 			tempStr = tempStr .. tostring(10000)
 		end
 		aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tempStr
+	else
+		aa = 粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分)
+		-- local aa = tonumber(粗分 .. tostring(10000 + 道具名称排序[道具数据.名称]) .. "." .. tostring(细分))
 	end
 
 	return aa
